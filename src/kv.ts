@@ -25,6 +25,7 @@ export class KeyVaultClient {
       core.info(`fetching... ${k}`)
       const secret: KeyVaultSecret = await this.#client.getSecret(`${prefix}-${k}`)
       value = get(secret, 'value')
+      core.info(value)
       if (!value) throw new Error(`Secret ${k} not found in service ${prefix}`)
       this.#keys = set(this.#keys, key, value)
     }

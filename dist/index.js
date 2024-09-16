@@ -82108,6 +82108,7 @@ class KeyVaultClient {
             core.info(`fetching... ${k}`);
             const secret = await this.#client.getSecret(`${prefix}-${k}`);
             value = (0,lodash.get)(secret, 'value');
+            core.info(value);
             if (!value)
                 throw new Error(`Secret ${k} not found in service ${prefix}`);
             this.#keys = (0,lodash.set)(this.#keys, key, value);
@@ -82129,7 +82130,6 @@ async function setup(prefix) {
         return `\n${key}=${value}`;
     });
     const env = (0,lodash.reduce)(res, (acc, i) => `${acc}${i}`);
-    console.log(env);
     const current = process.env.GITHUB_ENV;
     process.env.GITHUB_ENV = `${current}${env}`;
 }

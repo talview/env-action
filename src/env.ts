@@ -1,6 +1,7 @@
 import { reduce, filter, startsWith } from 'lodash'
 import { PromiseExtended } from './promise'
 import Kv from './kv'
+
 export async function setup(prefix: string): Promise<void> {
   const items = filter(Object.keys(process.env), (i: string) => startsWith(i, `${prefix}_`))
   const res = await PromiseExtended.map(items, async (k: string): Promise<string> => {
