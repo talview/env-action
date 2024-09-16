@@ -12,20 +12,11 @@ inputs:
     required: true
     default: 'SVC'
 runs:
-  using: 'composite'
-  steps:
-    - name: Use Node.js 20.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20.x
-    - name: setup env
-      shell: bash
-      run: |
-        cd ${WORKSPACE}
-        cd ${ACTION_PATH}
-        node ${ACTION_PATH}/dist/index.js
-      env:
-        ACTION_PATH: ${{ github.action_path }}
-        WORKSPACE: ${{ github.workspace }}
-        SERVICE_PREFIX: ${{ inputs.SERVICE_PREFIX }}
-        SECRETS_CONTEXT: ${{ toJSON(secrets) }}
+  using: 'node20'
+  main: dist/index.js
+  env:
+    ACTION_PATH: ${{ github.action_path }}
+    WORKSPACE: ${{ github.workspace }}
+    SERVICE_PREFIX: ${{ inputs.SERVICE_PREFIX }}
+    SECRETS_CONTEXT: ${{ toJSON(secrets) }}
+
