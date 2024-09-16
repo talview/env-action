@@ -82114,8 +82114,8 @@ class KeyVaultClient {
 
 
 
-async function setup(prefix, secrets) {
-    const items = (0,lodash.filter)((0,lodash.keys)(secrets), i => !(0,lodash.startsWith)(i, 'AZURE'));
+async function setup(prefix) {
+    const items = (0,lodash.filter)((0,lodash.keys)(process.env), (i) => (0,lodash.startsWith)(i, 'INPUT_ENVKEY_') && !(0,lodash.startsWith)(i, 'INPUT_ENVKEY_AZURE_'));
     const res = await PromiseExtended.map(items, async (key) => {
         const value = await kv.getSecret(prefix, key);
         return `\n${key}=${value}`;
@@ -82136,8 +82136,7 @@ async function run() {
     try {
         // const version = process.env.VERSION as Version
         const SVC_PREFIX = core.getInput('SERVICE_PREFIX');
-        const SECRETS = core.getInput('SECRETS_CONTEXT');
-        await setup(SVC_PREFIX, SECRETS);
+        await setup(SVC_PREFIX);
     }
     catch (error) {
         // Fail the workflow run if an error occurs

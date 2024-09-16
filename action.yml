@@ -11,11 +11,6 @@ inputs:
     description: 'service prefix to get keys from'
     required: true
     default: 'SVC'
-  SECRETS_CONTEXT:
-    description: 'keys'
-    required: false
-    default: ${{ toJSON(secrets) }}
 runs:
   using: 'node20'
   main: dist/index.js
-  env:
