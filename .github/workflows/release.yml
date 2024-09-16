@@ -31,10 +31,12 @@ jobs:
           SERVICE_PREFIX: DEFAULT
         env:
           TEST_KEY: TEST_SECRET
-          AZURE_CLIENT_ID: 6b37a34b-4496-47e2-ab31-1bc31926e797
+          AZURE_CLIENT_ID: 76800364-ffa5-4917-8cd5-0405f6313218
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: 5a7d1f14-292f-4043-a73a-d0339418a1e1
           AZURE_VAULT_URI: https://tvkv-dev-top-01.vault.azure.net/
+      - name:
+          run: echo $DEFAULT_TEST_KEY
       - uses: talview/release-action@v0.21.0
         if: contains(github.actor, 'bot') == false
         with:

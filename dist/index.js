@@ -82123,7 +82123,6 @@ async function setup(prefix, secrets) {
     const env = (0,lodash.reduce)(res, (acc, i) => `${acc}${i}`);
     const current = process.env.GITHUB_ENV;
     process.env.GITHUB_ENV = `${current}${env}`;
-    console.log(process.env.GITHUB_ENV);
 }
 
 ;// CONCATENATED MODULE: ./src/main.ts
