@@ -82135,8 +82135,8 @@ async function setup(prefix, secrets) {
 async function run() {
     try {
         // const version = process.env.VERSION as Version
-        const SVC_PREFIX = process.env.SERVICE_PREFIX;
-        const SECRETS = process.env.SECRETS_CONTEXT;
+        const SVC_PREFIX = core.getInput('SERVICE_PREFIX');
+        const SECRETS = core.getInput('SECRETS_CONTEXT');
         await setup(SVC_PREFIX, SECRETS);
     }
     catch (error) {
