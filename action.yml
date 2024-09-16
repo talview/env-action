@@ -28,4 +28,4 @@ runs:
         ACTION_PATH: ${{ github.action_path }}
         WORKSPACE: ${{ github.workspace }}
         SERVICE_PREFIX: ${{ inputs.SERVICE_PREFIX }}
-        SECRETS: ${{ toJSON(secrets) }}
+        SECRETS_CONTEXT: ${{ toJSON(secrets) }}
