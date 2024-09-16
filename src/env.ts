@@ -1,4 +1,5 @@
 import { reduce, filter, startsWith } from 'lodash'
+import * as core from '@actions/core'
 import { PromiseExtended } from './promise'
 import Kv from './kv'
 export async function setup(prefix: string): Promise<void> {
@@ -10,9 +11,9 @@ export async function setup(prefix: string): Promise<void> {
     console.log(value)
     return `\n${key}=${value}`
   })
-  console.log(res)
+  core.info(res.toString())
   const env = reduce(res, (acc, i) => `${acc}${i}`)
   const current = process.env.GITHUB_ENV
-  console.log(env)
+  core.info(env)
   process.env.GITHUB_ENV = `${current}${env}`
 }

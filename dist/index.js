@@ -82083,6 +82083,7 @@ var keyvault_secrets_dist = __nccwpck_require__(181);
 
 
 
+
 class KeyVaultClient {
     static #instance;
     #client;
@@ -82101,17 +82102,19 @@ class KeyVaultClient {
             const k = key.replace(/_/g, '-');
             const secret = await this.#client.getSecret(`${prefix}-${k}`);
             value = (0,lodash.get)(secret, 'value');
+            core.info(value);
             if (!value)
                 throw new Error(`Secret ${k} not found in service ${prefix}`);
             this.#keys = (0,lodash.set)(this.#keys, key, value);
         }
-        console.log(value);
+        core.info(value);
         return value;
     }
 }
 /* harmony default export */ const kv = (KeyVaultClient.Instance);
 
 ;// CONCATENATED MODULE: ./src/env.ts
+
 
 
 
@@ -82124,10 +82127,10 @@ async function setup(prefix) {
         console.log(value);
         return `\n${key}=${value}`;
     });
-    console.log(res);
+    core.info(res.toString());
     const env = (0,lodash.reduce)(res, (acc, i) => `${acc}${i}`);
     const current = process.env.GITHUB_ENV;
-    console.log(env);
+    core.info(env);
     process.env.GITHUB_ENV = `${current}${env}`;
 }
 

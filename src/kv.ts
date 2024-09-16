@@ -1,6 +1,7 @@
 import { DefaultAzureCredential } from '@azure/identity'
 import { type KeyVaultSecret, SecretClient } from '@azure/keyvault-secrets'
 import { get, set } from 'lodash'
+import * as core from '@actions/core'
 
 export class KeyVaultClient {
   static #instance: KeyVaultClient
@@ -23,10 +24,11 @@ export class KeyVaultClient {
       const k = key.replace(/_/g, '-')
       const secret: KeyVaultSecret = await this.#client.getSecret(`${prefix}-${k}`)
       value = get(secret, 'value')
+      core.info(value)
       if (!value) throw new Error(`Secret ${k} not found in service ${prefix}`)
       this.#keys = set(this.#keys, key, value)
     }
-    console.log(value)
+    core.info(value)
     return value
   }
 }
