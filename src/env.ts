@@ -4,7 +4,7 @@ import Kv from './kv'
 export async function setup(prefix: string): Promise<void> {
   const items = filter(Object.keys(process.env), (i: string) => startsWith(i, `${prefix}_`) && !startsWith(i, 'AZURE_'))
   const res = await PromiseExtended.map(items, async (k: string): Promise<string> => {
-    const key = k.split('${prefix}_')[1]
+    const key = k.split(`${prefix}_`)[1]
     const value: string = await Kv.getSecret(prefix, key)
     return `\n${key}=${value}`
   })
