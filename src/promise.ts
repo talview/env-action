@@ -1,0 +1,19 @@
+export class PromiseExtended<T> extends Promise<T> {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  static async map(it: any[], func: Function, options?: { concurrency?: number }): Promise<any[]> {
+    const res: any[] = []
+    await Promise.allSettled(
+      Array(options?.concurrency || 3)
+        .fill(Array.from(it).entries())
+        .map(async iterator => {
+          for (const [, item] of iterator) {
+            const i = await func(item)
+            res.push(i)
+          }
+        })
+    )
+    return res
+  }
+}
+
+export default PromiseExtended

@@ -1,0 +1,31 @@
+name: talview/env-action
+description: 'Env action'
+author: 'talview'
+
+branding:
+  icon: 'heart'
+  color: 'red'
+
+inputs:
+  SERVICE_PREFIX:
+    description: 'service prefix to get keys from'
+    required: true
+    default: 'SVC'
+runs:
+  using: 'composite'
+  steps:
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+    - name: setup env
+      shell: bash
+      run: |
+        cd ${WORKSPACE}
+        cd ${ACTION_PATH}
+        node ${ACTION_PATH}/dist/index.js
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        WORKSPACE: ${{ github.workspace }}
+        SERVICE_PREFIX: ${{ inputs.SERVICE_PREFIX }}
+        SECRETS: ${{ toJSON(secrets) }}
