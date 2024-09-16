@@ -82115,9 +82115,10 @@ class KeyVaultClient {
 
 
 async function setup(prefix) {
-    const items = (0,lodash.filter)(Object.keys(process.env), (i) => (0,lodash.startsWith)(i, `${prefix}_`) && !(0,lodash.startsWith)(i, 'AZURE_'));
+    const items = (0,lodash.filter)(Object.keys(process.env), (i) => (0,lodash.startsWith)(i, `${prefix}_`));
     const res = await PromiseExtended.map(items, async (k) => {
         const key = k.split(`${prefix}_`)[1];
+        console.log(key);
         const value = await kv.getSecret(prefix, key);
         return `\n${key}=${value}`;
     });
