@@ -21,6 +21,7 @@ export class KeyVaultClient {
     let value = get(this.#keys, key) // in memory cache
     if (!value) {
       const k = key.replace(/_/g, '-')
+      console.log(`${prefix}-${k}`)
       const secret: KeyVaultSecret = await this.#client.getSecret(`${prefix}-${k}`)
 
       value = get(secret, 'value')
