@@ -1,4 +1,4 @@
-import { reduce, filter, startsWith } from 'lodash'
+import { filter, startsWith } from 'lodash'
 import * as core from '@actions/core'
 import { PromiseExtended } from './promise'
 import Kv from './kv'
