@@ -82099,6 +82099,7 @@ class KeyVaultClient {
         let value = (0,lodash.get)(this.#keys, key); // in memory cache
         if (!value) {
             const k = key.replace(/_/g, '-');
+            console.log(`${prefix}-${k}`);
             const secret = await this.#client.getSecret(`${prefix}-${k}`);
             value = (0,lodash.get)(secret, 'value');
             if (!value)
