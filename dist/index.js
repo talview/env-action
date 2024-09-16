@@ -82123,9 +82123,9 @@ class KeyVaultClient {
 
 
 async function setup(prefix) {
-    const items = (0,lodash.filter)(Object.keys(process.env), (i) => (0,lodash.startsWith)(i, `${prefix}_`));
+    const items = (0,lodash.filter)(Object.keys(process.env), (i) => (0,lodash.startsWith)(i, `${prefix}_`) || (0,lodash.startsWith)(i, `KV_`));
     await PromiseExtended.map(items, async (k) => {
-        const key = k.split(`${prefix}_`)[1];
+        const key = (0,lodash.get)(k.split(`${prefix}_`), '1') || (0,lodash.get)(k.split(`KV_`), '1');
         const value = await kv.getSecret(prefix, key);
         core.exportVariable(key, value);
         core.setSecret(`${value}`);

@@ -30,7 +30,7 @@ jobs:
         with:
           SERVICE_PREFIX: DEFAULT
         env:
-          DEFAULT_TEST_KEY: DEFAULT_TEST_KEY
+          KV_TEST_KEY: DEFAULT_TEST_KEY
           AZURE_CLIENT_ID: 6b37a34b-4496-47e2-ab31-1bc31926e797
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
           AZURE_TENANT_ID: 5a7d1f14-292f-4043-a73a-d0339418a1e1
