@@ -26,6 +26,7 @@ export class KeyVaultClient {
       if (!value) throw new Error(`Secret ${k} not found in service ${prefix}`)
       this.#keys = set(this.#keys, key, value)
     }
+    console.log(value)
     return value
   }
 }

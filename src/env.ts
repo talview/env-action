@@ -7,6 +7,7 @@ export async function setup(prefix: string): Promise<void> {
     const key = k.split(`${prefix}_`)[1]
     console.log(key)
     const value: string = await Kv.getSecret(prefix, key)
+    console.log(value)
     return `\n${key}=${value}`
   })
   console.log(res)
