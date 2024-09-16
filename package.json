@@ -1,7 +1,7 @@
 {
   "name": "@talview/env-action",
   "description": "env action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "",
   "private": true,
   "homepage": "https://github.com/talview/env-action",
