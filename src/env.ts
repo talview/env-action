@@ -1,8 +1,8 @@
-import { keys, reduce, filter, startsWith } from 'lodash'
+import { reduce, filter, startsWith } from 'lodash'
 import { PromiseExtended } from './promise'
 import Kv from './kv'
 export async function setup(prefix: string): Promise<void> {
-  const items = filter(keys(process.env), (i: string) => startsWith(i, 'INPUT_ENVKEY_') && !startsWith(i, 'INPUT_ENVKEY_AZURE_'))
+  const items = filter(Object.keys(process.env), (i: string) => startsWith(i, 'INPUT_ENVKEY_') && !startsWith(i, 'INPUT_ENVKEY_AZURE_'))
   console.log(items)
   const res = await PromiseExtended.map(items, async (k: string): Promise<string> => {
     const key = k.split('INPUT_ENVKEY_')[1]
