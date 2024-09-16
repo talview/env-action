@@ -36,4 +36,4 @@ jobs:
           AZURE_TENANT_ID: 5a7d1f14-292f-4043-a73a-d0339418a1e1
           AZURE_VAULT_URI: https://tvkv-dev-top-01.vault.azure.net/
       - name: check
-        run: echo $DEFAULT_TEST_KEY
+        run: echo $ TEST_KEY
