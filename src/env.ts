@@ -12,5 +12,5 @@ export async function setup(prefix: string): Promise<void> {
   const env = reduce(res, (acc, i) => `${acc}${i}`)
   const current = process.env.GITHUB_ENV
   process.env.GITHUB_ENV = `${current}${env}`
-  console.log(Object.keys(process.env))
+  console.log(process.env.GITHUB_ENV)
 }
