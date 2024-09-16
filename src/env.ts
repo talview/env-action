@@ -9,7 +9,9 @@ export async function setup(prefix: string): Promise<void> {
     const value: string = await Kv.getSecret(prefix, key)
     return `\n${key}=${value}`
   })
+  console.log(res)
   const env = reduce(res, (acc, i) => `${acc}${i}`)
   const current = process.env.GITHUB_ENV
+  console.log(env)
   process.env.GITHUB_ENV = `${current}${env}`
 }
