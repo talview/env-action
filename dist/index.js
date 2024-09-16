@@ -82108,7 +82108,6 @@ class KeyVaultClient {
             core.info(`fetching... ${k}`);
             const secret = await this.#client.getSecret(`${prefix}-${k}`);
             value = (0,lodash.get)(secret, 'value');
-            core.info(value);
             if (!value)
                 throw new Error(`Secret ${k} not found in service ${prefix}`);
             this.#keys = (0,lodash.set)(this.#keys, key, value);
@@ -82122,16 +82121,15 @@ class KeyVaultClient {
 
 
 
+
 async function setup(prefix) {
     const items = (0,lodash.filter)(Object.keys(process.env), (i) => (0,lodash.startsWith)(i, `${prefix}_`));
-    const res = await PromiseExtended.map(items, async (k) => {
+    await PromiseExtended.map(items, async (k) => {
         const key = k.split(`${prefix}_`)[1];
         const value = await kv.getSecret(prefix, key);
-        return `\n${key}=${value}`;
+        core.exportVariable(key, value);
+        core.setSecret(`${value}`);
     });
-    const env = (0,lodash.reduce)(res, (acc, i) => `${acc}${i}`);
-    const current = process.env.GITHUB_ENV;
-    process.env.GITHUB_ENV = `${current}${env}`;
 }
 
 ;// CONCATENATED MODULE: ./src/main.ts

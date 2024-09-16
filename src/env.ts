@@ -1,16 +1,14 @@
 import { reduce, filter, startsWith } from 'lodash'
+import * as core from '@actions/core'
 import { PromiseExtended } from './promise'
 import Kv from './kv'
 
 export async function setup(prefix: string): Promise<void> {
   const items = filter(Object.keys(process.env), (i: string) => startsWith(i, `${prefix}_`))
-  const res = await PromiseExtended.map(items, async (k: string): Promise<string> => {
+  await PromiseExtended.map(items, async (k: string): Promise<void> => {
     const key = k.split(`${prefix}_`)[1]
     const value: string = await Kv.getSecret(prefix, key)
-    return `\n${key}=${value}`
+    core.exportVariable(key, value)
+    core.setSecret(`${value}`)
   })
-  const env = reduce(res, (acc, i) => `${acc}${i}`)
-  const current = process.env.GITHUB_ENV
-  process.env.GITHUB_ENV = `${current}${env}`
-  console.log(process.env.GITHUB_ENV)
 }
