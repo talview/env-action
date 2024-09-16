@@ -22,13 +22,12 @@ export class KeyVaultClient {
     let value = get(this.#keys, key) // in memory cache
     if (!value) {
       const k = key.replace(/_/g, '-')
+      core.info(`fetching... ${k}`)
       const secret: KeyVaultSecret = await this.#client.getSecret(`${prefix}-${k}`)
       value = get(secret, 'value')
-      core.info(value)
       if (!value) throw new Error(`Secret ${k} not found in service ${prefix}`)
       this.#keys = set(this.#keys, key, value)
     }
-    core.info(value)
     return value
   }
 }
