@@ -9,6 +9,7 @@ export async function setup(prefix: string): Promise<void> {
     return `\n${key}=${value}`
   })
   const env = reduce(res, (acc, i) => `${acc}${i}`)
+  console.log(env)
   const current = process.env.GITHUB_ENV
   process.env.GITHUB_ENV = `${current}${env}`
 }
