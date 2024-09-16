@@ -82066,8 +82066,13 @@ class PromiseExtended extends Promise {
             .fill(Array.from(it).entries())
             .map(async (iterator) => {
             for (const [, item] of iterator) {
-                const i = await func(item);
-                res.push(i);
+                try {
+                    const i = await func(item);
+                    res.push(i);
+                }
+                catch (e) {
+                    console.log(e);
+                }
             }
         }));
         return res;

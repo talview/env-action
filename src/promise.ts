@@ -7,8 +7,12 @@ export class PromiseExtended<T> extends Promise<T> {
         .fill(Array.from(it).entries())
         .map(async iterator => {
           for (const [, item] of iterator) {
-            const i = await func(item)
-            res.push(i)
+            try {
+              const i = await func(item)
+              res.push(i)
+            } catch (e) {
+              console.log(e)
+            }
           }
         })
     )
