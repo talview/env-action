@@ -36,6 +36,13 @@ jobs:
           AZURE_TENANT_ID: 5a7d1f14-292f-4043-a73a-d0339418a1e1
           AZURE_VAULT_URI: https://tvkv-dev-top-01.vault.azure.net/
       - name: check
-        run: echo ${{ env.TEST_KEY }}
+        run: echo ${{ env.DEFAULT_TEST_KEY }}
       - name: check
-        run: echo $TEST_KEY
+        run: echo $DEFAULT_TEST_KEY
+      - uses: talview/release-action@v0.26.0
+        if: contains(github.actor, 'bot') == false
+        with:
+          VERSION_PREFIX: ''
+          VERSION: ${{ contains(github.event.head_commit.message, '[patch]') && 'patch' || 'minor' }}
+          BOT_ID: ${{ vars.TALVIEW_BOT_ID }}
+          BOT_KEY: ${{ secrets.TALVIEW_BOT_KEY }}
