@@ -10,6 +10,7 @@ export async function setup(prefix: string): Promise<void> {
       const key = get(k.split(`${prefix}_`), '1') || get(k.split(`KV_`), '1')
       const value: string = await Kv.getSecret(prefix, key)
       const target = process.env[k]!
+      core.info(`setting... ${target}`)
       core.exportVariable(target, value)
       core.setSecret(`${value}`)
     } catch (err) {

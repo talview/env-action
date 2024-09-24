@@ -82129,6 +82129,7 @@ async function setup(prefix) {
             const key = (0,lodash.get)(k.split(`${prefix}_`), '1') || (0,lodash.get)(k.split(`KV_`), '1');
             const value = await kv.getSecret(prefix, key);
             const target = process.env[k];
+            core.info(`setting... ${target}`);
             core.exportVariable(target, value);
             core.setSecret(`${value}`);
         }
