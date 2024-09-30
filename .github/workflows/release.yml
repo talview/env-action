@@ -39,7 +39,7 @@ jobs:
         run: echo ${{ env.DEFAULT_TEST_KEY }}
       - name: check
         run: echo $DEFAULT_TEST_KEY
-      - uses: talview/release-action@v0.26.0
+      - uses: talview/release-action@v0.27.0
         if: contains(github.actor, 'bot') == false
         with:
           VERSION_PREFIX: ''
