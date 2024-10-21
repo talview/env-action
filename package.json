@@ -69,7 +69,7 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@azure/identity": "^4.4.1",
+    "@azure/identity": "^4.5.0",
     "@azure/keyvault-secrets": "^4.8.0",
     "lodash": "^4.17.21"
   },
